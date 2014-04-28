@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
 
+gem 'quickbooks_api'     # needed for lib/qbwc
+gem 'rubyjedi-soap4r'    # needed for lib/qbwc
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
