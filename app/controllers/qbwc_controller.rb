@@ -4,23 +4,26 @@ class QbwcController < ApplicationController
   protect_from_forgery :except => :api
 
   def qwc
-    qwc = <<-QWC
-    <QBWCXML>
-    <AppName>QBWC Multiuser Example</AppName>
-    <AppID>QB</AppID>
-    <AppURL>http://localhostmac:3000/apis/quickbooks/api</AppURL>
-    <AppDescription>Rails-Quickbooks Integration</AppDescription>
-    <AppSupport>http://localhostmac:3000/</AppSupport>
-    <UserName>test</UserName>
-    <OwnerID>#{QBWC.owner_id}</OwnerID>
-    <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1EB}</FileID>
-    <QBType>QBPOS</QBType>
-    <Scheduler>
-      <RunEveryNMinutes>5</RunEveryNMinutes>
-    </Scheduler>
-    </QBWCXML>
-    QWC
-    send_data qwc, :filename => 'qbwc_mu.qwc'
+    user = User.find(params[:user_id])
+    if user
+      qwc = <<-QWC
+      <QBWCXML>
+      <AppName>QBWC Multiuser Example</AppName>
+      <AppID>QB</AppID>
+      <AppURL>http://localhostmac:3000/apis/quickbooks/api</AppURL>
+      <AppDescription>Rails-Quickbooks Integration</AppDescription>
+      <AppSupport>http://localhostmac:3000/</AppSupport>
+      <UserName>#{user[:username]}</UserName>
+      <OwnerID>#{QBWC.owner_id}</OwnerID>
+      <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1EB}</FileID>
+      <QBType>QBPOS</QBType>
+      <Scheduler>
+        <RunEveryNMinutes>5</RunEveryNMinutes>
+      </Scheduler>
+      </QBWCXML>
+      QWC
+      send_data qwc, :filename => 'qbwc_mu.qwc'
+    end
   end
 
   def api
