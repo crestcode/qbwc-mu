@@ -38,22 +38,36 @@ class QbwcController < ApplicationController
     end
 
 
-    if params["Envelope"]["Body"].keys.first =="authenticate"
-      QBWC.add_job("test", :import_vendors) do
-        '
-        <?qbposxml version="3.0"?>
-        <QBPOSXML>
-      <QBPOSXMLMsgsRq onError="stopOnError">
-            <ItemInventoryQueryRq>
-          </ItemInventoryQueryRq>
-        </QBPOSXMLMsgsRq>
-        </QBPOSXML>
-      '
-      end
+    if params["Envelope"]["Body"].keys.first == "authenticate"
 
-      QBWC.jobs["test"][:import_vendors].set_response_proc do |qbxml|
-        puts "====================Dumping QBXML====================="
-        puts qbxml
+      username = params["Envelope"]["Body"]["authenticate"]["strUserName"]
+      password = params["Envelope"]["Body"]["authenticate"]["strPassword"]
+
+      user = User.find_by_username_and_password(username, password)
+
+      if user
+
+        QBWC.company_file_path = "Computer Name=#{user.computer_name};Company Data=#{user.company_data};Version=#{user.version}"
+
+        # Clear the merchant's job queue each time (if not nil)
+        QBWC.jobs[user.username].clear if QBWC.jobs[user.username]
+
+        QBWC.add_job(user.username, :import_vendors) do
+          '
+          <?qbposxml version="3.0"?>
+          <QBPOSXML>
+          <QBPOSXMLMsgsRq onError="stopOnError">
+            <ItemInventoryQueryRq>
+            </ItemInventoryQueryRq>
+          </QBPOSXMLMsgsRq>
+          </QBPOSXML>
+        '
+        end
+
+        QBWC.jobs["test"][:import_vendors].set_response_proc do |qbxml|
+          puts "====================Dumping QBXML====================="
+          puts qbxml
+        end
       end
     end
 
