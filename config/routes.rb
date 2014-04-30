@@ -1,5 +1,8 @@
 QbwcMu::Application.routes.draw do
 
+  resources :product_feed_items
+
+
   resources :users
 
 

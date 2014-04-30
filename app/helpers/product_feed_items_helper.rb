@@ -1,0 +1,2 @@
+module ProductFeedItemsHelper
+end

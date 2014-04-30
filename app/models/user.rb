@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates :username, :password, length: { minimum: 3 }
 
+  has_many :product_feed_items, dependent: :destroy
+
 end

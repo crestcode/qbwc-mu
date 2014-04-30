@@ -49,7 +49,7 @@ class QbwcController < ApplicationController
 
         QBWC.company_file_path = "Computer Name=#{user.computer_name};Company Data=#{user.company_data};Version=#{user.version}"
 
-        # Clear the merchant's job queue each time (if not nil)
+        # Clear the user's job queue each time (if not nil)
         QBWC.jobs[user.username].clear if QBWC.jobs[user.username]
 
         QBWC.add_job(user.username, :import_vendors) do

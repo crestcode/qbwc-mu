@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @product_feed_item.user_id %>
+</p>
+
+<p>
+  <b>Item identifier:</b>
+  <%= @product_feed_item.item_identifier %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @product_feed_item.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product_feed_item.description %>
+</p>
+
+<p>
+  <b>Inventory:</b>
+  <%= @product_feed_item.inventory %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @product_feed_item.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_feed_item_path(@product_feed_item) %> |
+<%= link_to 'Back', product_feed_items_path %>
