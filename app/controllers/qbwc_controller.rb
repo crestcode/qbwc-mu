@@ -64,9 +64,31 @@ class QbwcController < ApplicationController
         '
         end
 
-        QBWC.jobs["test"][:import_vendors].set_response_proc do |qbxml|
-          puts "====================Dumping QBXML====================="
-          puts qbxml
+        QBWC.jobs[user.username][:import_vendors].set_response_proc do |qbxml|
+          #puts "====================Dumping QBXML====================="
+          #puts qbxml
+
+          # If only a single item is returned, a hash is returned instead of an array, so we convert the hash into an array
+          if qbxml["item_inventory_ret"].class == Hash
+            item_inventory_ret_temp = qbxml["item_inventory_ret"]
+            qbxml["item_inventory_ret"] = Array.new
+            qbxml["item_inventory_ret"] << item_inventory_ret_temp
+          end
+          if qbxml["item_inventory_ret"]
+            qbxml["item_inventory_ret"].each do |item|
+              item_identifier = item["list_id"]
+
+              product_feed_item = ProductFeedItem.find_by_item_identifier_and_user_id(item_identifier, user.id)
+              product_feed_item ||= ProductFeedItem.new
+              product_feed_item.item_identifier = item_identifier
+              product_feed_item.user_id = user.id
+              product_feed_item.name = item["desc1"]
+              product_feed_item.description = item["desc2"]
+              product_feed_item.inventory = item["on_hand_store01"]
+              product_feed_item.price = item["price1"]
+              product_feed_item.save
+            end
+          end
         end
       end
     end
