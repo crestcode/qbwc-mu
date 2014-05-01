@@ -21,13 +21,12 @@
     <td><%= product_feed_item.description %></td>
     <td><%= product_feed_item.inventory %></td>
     <td><%= product_feed_item.price %></td>
-    <td><%= link_to 'Show', product_feed_item %></td>
-    <td><%= link_to 'Edit', edit_product_feed_item_path(product_feed_item) %></td>
-    <td><%= link_to 'Destroy', product_feed_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', user_product_feed_item_path(@user_id, product_feed_item.id) %></td>
+    <td><%= link_to 'Destroy', user_product_feed_item_path(@user_id, product_feed_item.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Product feed item', new_product_feed_item_path %>
+<%= link_to 'New Product feed item', new_user_product_feed_item_path %>

@@ -2,6 +2,7 @@ class ProductFeedItemsController < ApplicationController
   # GET /product_feed_items
   # GET /product_feed_items.json
   def index
+    @user_id = params[:user_id]
     @product_feed_items = ProductFeedItem.all
 
     respond_to do |format|
@@ -13,6 +14,7 @@ class ProductFeedItemsController < ApplicationController
   # GET /product_feed_items/1
   # GET /product_feed_items/1.json
   def show
+    @user_id = params[:user_id]
     @product_feed_item = ProductFeedItem.find(params[:id])
 
     respond_to do |format|
@@ -76,7 +78,7 @@ class ProductFeedItemsController < ApplicationController
     @product_feed_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to product_feed_items_url }
+      format.html { redirect_to user_product_feed_items_url(params[:user_id]) }
       format.json { head :no_content }
     end
   end

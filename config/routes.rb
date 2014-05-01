@@ -1,9 +1,8 @@
 QbwcMu::Application.routes.draw do
 
-  resources :product_feed_items
-
-
-  resources :users
+  resources :users do
+    resources :product_feed_items
+  end
 
 
   match 'apis/quickbooks/:action', :controller => 'qbwc', :as => 'quickbooks', via: [:get, :post]
