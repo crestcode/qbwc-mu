@@ -8,7 +8,7 @@ one:
   version: 1
 
 two:
-  username: MyString
+  username: MyString2
   password: MyString
   computer_name: MyString
   company_data: MyString
