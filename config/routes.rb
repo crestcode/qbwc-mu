@@ -1,7 +1,7 @@
 QbwcMu::Application.routes.draw do
 
   resources :users do
-    resources :product_feed_items
+    resources :product_feed_items, :only => [:index, :show, :destroy]
   end
 
 

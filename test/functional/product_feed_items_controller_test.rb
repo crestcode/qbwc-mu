@@ -6,44 +6,21 @@ class ProductFeedItemsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, user_id: @product_feed_item.user_id
     assert_response :success
     assert_not_nil assigns(:product_feed_items)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create product_feed_item" do
-    assert_difference('ProductFeedItem.count') do
-      post :create, product_feed_item: { description: @product_feed_item.description, inventory: @product_feed_item.inventory, item_identifier: @product_feed_item.item_identifier, name: @product_feed_item.name, price: @product_feed_item.price, user_id: @product_feed_item.user_id }
-    end
-
-    assert_redirected_to product_feed_item_path(assigns(:product_feed_item))
-  end
-
   test "should show product_feed_item" do
-    get :show, id: @product_feed_item
+    get :show, user_id: @product_feed_item.user_id, id: @product_feed_item
     assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @product_feed_item
-    assert_response :success
-  end
-
-  test "should update product_feed_item" do
-    put :update, id: @product_feed_item, product_feed_item: { description: @product_feed_item.description, inventory: @product_feed_item.inventory, item_identifier: @product_feed_item.item_identifier, name: @product_feed_item.name, price: @product_feed_item.price, user_id: @product_feed_item.user_id }
-    assert_redirected_to product_feed_item_path(assigns(:product_feed_item))
   end
 
   test "should destroy product_feed_item" do
     assert_difference('ProductFeedItem.count', -1) do
-      delete :destroy, id: @product_feed_item
+      delete :destroy, user_id: @product_feed_item.user_id, id: @product_feed_item
     end
 
-    assert_redirected_to product_feed_items_path
+    assert_redirected_to user_product_feed_items_path(@product_feed_item.user_id)
   end
 end
