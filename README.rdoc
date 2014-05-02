@@ -1,6 +1,6 @@
 == QBWC Multiuser
 
-A demo Rails application featuring my own variation on the [skryl/qbwc](https://github.com/skryl/qbwc) gem.
+A demo Rails application featuring my own variation on the skryl/qbwc (https://github.com/skryl/qbwc) gem.
 The original was designed for a single Quickbooks user to integrate with a Rails app, but I had a case where
 I needed to integrate multiple Quickbooks users (who were often connecting concurrently) with a single app.
 You can peruse my modications of the gem in the lib/qbwc directory.
@@ -10,11 +10,11 @@ You can peruse my modications of the gem in the lib/qbwc directory.
 
 Because this example is a Rails app, installation is straightforward:
 
-git clone git@github.com:crestcode/qbwc_mu.git
-cd qbwc_mu
-bundle install
-rake db:migrate
-rails s
+1. git clone git@github.com:crestcode/qbwc_mu.git
+2. cd qbwc_mu
+3. bundle install
+4. rake db:migrate
+5. rails s
 
 Point your browser to localhost:3000 and create a user (note: The app is currently set up for Quickbook POS
 users but could easily be modified for Enterprise users). Once a user is successfully created, you will have
