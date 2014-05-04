@@ -8,7 +8,7 @@ You can peruse my modications of the gem in the lib/qbwc directory.
 
 == Getting Started
 
-Because this example is a Rails app, installation is straightforward:
+To install:
 
 1. git clone git@github.com:crestcode/qbwc_mu.git
 2. cd qbwc_mu
