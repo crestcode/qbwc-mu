@@ -1,6 +1,6 @@
 == QBWC Multiuser
 
-A demo Rails application featuring my own variation on the skryl/qbwc (https://github.com/skryl/qbwc) gem.
+A demo Rails application featuring my own multiuser variation on the skryl/qbwc (https://github.com/skryl/qbwc) gem.
 The original was designed for a single Quickbooks user to integrate with a Rails app, but I had a case where
 I needed to integrate multiple Quickbooks users (who were often connecting concurrently) with a single app.
 You can peruse my modications of the gem in the lib/qbwc directory.
